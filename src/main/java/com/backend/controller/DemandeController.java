@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import com.backend.dtos.DemandePrintDto;
 import com.backend.entities.Demande;
 import com.backend.service.DemandeService;
 import lombok.RequiredArgsConstructor;
@@ -60,15 +61,22 @@ public class DemandeController {
     @GetMapping(value = "/imprimer/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> imprimerDemande(@PathVariable("id") long id) throws JRException, IOException {
 
+        Demande demandeAImprimer = demandeService.getOneDemande(id);
+
+        if (demandeAImprimer==null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(List.of(
-                new Demande()
+                DemandePrintDto.fromEntity(demandeAImprimer)
         ), false);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("grade", "Agent de Police");
+        parameters.put("demande_ID",demandeAImprimer.getIdDemande());
 
         JasperReport compileReport = JasperCompileManager
-                .compileReport(new FileInputStream("src/main/resources/permission.jrxml"));
+                .compileReport(new FileInputStream("src/main/resources/permission2.jrxml"));
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, parameters, beanCollectionDataSource);
 
@@ -80,7 +88,8 @@ public class DemandeController {
         System.err.println(data);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=permission.pdf");
+        String filename = "permission-"+demandeAImprimer.getPrenom()+"-"+demandeAImprimer.getNom()+"-"+demandeAImprimer.getDateCreation()+".pdf";
+        headers.add("Content-Disposition", "inline; filename="+filename);
 
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
     }
