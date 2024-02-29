@@ -78,7 +78,13 @@ public class DemandeController {
         parameters.put("grade", "Agent de Police");
         parameters.put("demande_ID",demandeAImprimer.getIdDemande());
         JasperReport compileReport = JasperCompileManager
-                .compileReport(new FileInputStream("src/main/resources/permission2.jrxml"));
+                .compileReport(new FileInputStream("src/main/resources/demande.jrxml"));
+
+//        JasperReport compileReport = JasperCompileManager
+//                .compileReport(new FileInputStream("src/main/resources/permission2.jrxml"));
+
+//        JasperReport compileReport = JasperCompileManager
+//                .compileReport(new FileInputStream("src/main/resources/demandeDePermission.jrxml"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, parameters, beanCollectionDataSource);
         byte[] data = JasperExportManager.exportReportToPdf(jasperPrint);
         System.err.println(data);

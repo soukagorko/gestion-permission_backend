@@ -68,5 +68,7 @@ private Long idDemande;
     @Column(name = "destination", length = 50, nullable = false)
     private String destination;
     //
+    @Transient
+    private Date created_at;
 
 }

@@ -26,6 +26,8 @@ import java.util.Date;
 @Builder
 public class DemandePrintDto {
 
+    private Long idDemande;
+
     private String matricule;
 
     private String prenom;
@@ -52,9 +54,12 @@ public class DemandePrintDto {
 
     private String destination;
 
+    private Date created_at;
+
     public static DemandePrintDto fromEntity(Demande demande) {
 
         return DemandePrintDto.builder()
+                .idDemande(demande.getIdDemande())
                 .prenom(demande.getPrenom())
                 .nom(demande.getNom())
                 .matricule(demande.getMatricule())
@@ -68,6 +73,7 @@ public class DemandePrintDto {
                 .destination(demande.getDestination())
                 .objet(demande.getObjet())
                 .lieu(demande.getLieu())
+                .created_at(demande.getCreated_at())
                 .build();
 
     }
