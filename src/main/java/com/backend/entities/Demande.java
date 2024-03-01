@@ -68,6 +68,9 @@ private Long idDemande;
     @Column(name = "destination", length = 50, nullable = false)
     private String destination;
     //
+    @Column(columnDefinition = "Integer default 0")
+    private Integer statut;
+    //
     @Transient
     private Date created_at;
 

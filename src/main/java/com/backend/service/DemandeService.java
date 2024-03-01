@@ -23,4 +23,7 @@ public interface DemandeService {
     void deleteDemande(Long id);
 
     Demande getOneDemande(Long id);
+    //
+    Demande getOnePermission(Long id);
+    //
 }

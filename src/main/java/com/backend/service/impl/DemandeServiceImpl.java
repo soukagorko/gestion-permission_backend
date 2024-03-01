@@ -98,4 +98,15 @@ public class DemandeServiceImpl implements DemandeService {
         }
         return demandeOptional.get();
     }
+
+    @Override
+    public Demande getOnePermission(Long id) {
+        //
+        Optional<Demande> permissionOptional = this.demandeRepository.findById(id);
+        if (permissionOptional.isEmpty()){
+            return null;
+        }
+        return permissionOptional.get();
+        //
+    }
 }
