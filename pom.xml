@@ -49,6 +49,7 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.19.1</version>
 		</dependency>
+<<<<<<< HEAD
 
 		<dependency>
 			<groupId>com.auth0</groupId>
@@ -64,6 +65,21 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+=======
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-functions</artifactId>
+			<version>6.19.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.19.1</version>
+		</dependency>
+
+
+>>>>>>> 7946a30c57df611b092c326554e537eab31f2ca5
 	</dependencies>
 
 	<build>

@@ -69,6 +69,10 @@ public class DemandeServiceImpl implements DemandeService {
     public Demande getOneDemande(Long id) {
 
         Optional<Demande> demandeOptional = this.demandeRepository.findById(id);
+
+        if (demandeOptional.isEmpty()){
+            return null;
+        }
         return demandeOptional.get();
     }
 }

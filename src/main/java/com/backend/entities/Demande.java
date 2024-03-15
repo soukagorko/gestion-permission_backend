@@ -49,9 +49,20 @@ public class Demande implements Serializable {
     @Column(name="lieu", length = 50, nullable = false)
     private String lieu;
 
+    @Column(name = "date_debut", nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebut;
+
+    @Column(name = "date_fin", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateFin;
+
+    @Column(name = "date_creation", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateCreation;
 
     @Column(name = "objet", length = 100, nullable = true)
     private String objet;
