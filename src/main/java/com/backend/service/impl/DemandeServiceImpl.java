@@ -6,6 +6,7 @@ import com.backend.service.DemandeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ public class DemandeServiceImpl implements DemandeService {
 
     @Override
     public Long createOrUpdateDemande(Demande demande) {
+        demande.setDateCreation(new Date());
+        demande.setDateFin(new Date());
         return this.demandeRepository.save(demande).getIdDemande();
     }
 

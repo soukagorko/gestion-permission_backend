@@ -9,13 +9,11 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,27 +62,19 @@ public class DemandeController {
         ), false);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("grade", "Agent de Police");
-<<<<<<< HEAD
-        JasperReport compileReport = JasperCompileManager
-                .compileReport(new FileInputStream("src/main/resources/permission.jrxml"));
-=======
         parameters.put("demande_ID",demandeAImprimer.getIdDemande());
 
         JasperReport compileReport = JasperCompileManager
                 .compileReport(new FileInputStream("src/main/resources/permission2.jrxml"));
 
->>>>>>> 7946a30c57df611b092c326554e537eab31f2ca5
         JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, parameters, beanCollectionDataSource);
         byte[] data = JasperExportManager.exportReportToPdf(jasperPrint);
         System.err.println(data);
         HttpHeaders headers = new HttpHeaders();
-<<<<<<< HEAD
-        headers.add("Content-Disposition", "inline; filename=permission.pdf");
-=======
+
         String filename = "permission-"+demandeAImprimer.getPrenom()+"-"+demandeAImprimer.getNom()+"-"+demandeAImprimer.getDateCreation()+".pdf";
         headers.add("Content-Disposition", "inline; filename="+filename);
 
->>>>>>> 7946a30c57df611b092c326554e537eab31f2ca5
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
     }
 
